@@ -97,9 +97,9 @@ function Test-ServerBackupLongTermRetentionVault
 {
 	$location = "North Europe"
 	$serverVersion = "12.0"
-	$rg = Get-AzureRmResourceGroup -ResourceGroupName hchung
-	$server = Get-AzureRmSqlServer -ServerName hchung-testsvr -ResourceGroupName $rg.ResourceGroupName
-	$vaultResourceId = "/subscriptions/e5e8af86-2d93-4ebd-8eb5-3b0184daa9de/resourceGroups/hchung/providers/Microsoft.RecoveryServices/vaults/hchung-testvault"
+	$rg = Get-AzureRmResourceGroup -ResourceGroupName sqlbackuprg
+	$server = Get-AzureRmSqlServer -ServerName hchung-testsvr4 -ResourceGroupName $rg.ResourceGroupName
+	$vaultResourceId = "/Subscriptions/e5e8af86-2d93-4ebd-8eb5-3b0184daa9de/resourceGroups/sqlbackuprg/providers/Microsoft.RecoveryServices/vaults/sqlbackupvault"
 
 	# set
 	Set-AzureRmSqlServerBackupLongTermRetentionVault -ServerName $server.ServerName -ResourceGroupName $rg.ResourceGroupName -ResourceId $vaultResourceId
@@ -113,10 +113,10 @@ function Test-DatabaseBackupLongTermRetentionPolicy
 {
 	$location = "North Europe"
 	$serverVersion = "12.0"
-	$rg = Get-AzureRmResourceGroup -ResourceGroupName hchung
-	$server = Get-AzureRmSqlServer -ServerName hchung-testsvr -ResourceGroupName $rg.ResourceGroupName
-	$db = Get-AzureRmSqlDatabase -ServerName $server.ServerName -DatabaseName hchung-testdb -ResourceGroupName $rg.ResourceGroupName
-	$policyResourceId = "/subscriptions/e5e8af86-2d93-4ebd-8eb5-3b0184daa9de/resourceGroups/hchung/providers/Microsoft.RecoveryServices/vaults/hchung-testvault/backupPolicies/hchung-testpolicy"
+	$rg = Get-AzureRmResourceGroup -ResourceGroupName sqlbackuprg
+	$server = Get-AzureRmSqlServer -ServerName hchung-testsvr4 -ResourceGroupName $rg.ResourceGroupName
+	$db = Get-AzureRmSqlDatabase -ServerName $server.ServerName -DatabaseName hchung-testdb4 -ResourceGroupName $rg.ResourceGroupName
+	$policyResourceId = "/Subscriptions/e5e8af86-2d93-4ebd-8eb5-3b0184daa9de/resourceGroups/sqlbackuprg/providers/Microsoft.RecoveryServices/vaults/sqlbackupvault/backupPolicies/sqlBackupPolicy"
 
 	# set
 	Set-AzureRmSqlDatabaseBackupLongTermRetentionPolicy -ServerName $server.ServerName -ResourceGroupName $rg.ResourceGroupName -DatabaseName $db.DatabaseName -State "Enabled" -ResourceId $policyResourceId
