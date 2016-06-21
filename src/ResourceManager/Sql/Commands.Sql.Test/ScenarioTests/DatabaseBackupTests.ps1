@@ -132,8 +132,8 @@ function Test-RestoreLongTermRetentionBackup
 	$serverVersion = "12.0"
 	$rg = Get-AzureRmResourceGroup -ResourceGroupName hchung
 	$server = Get-AzureRmSqlServer -ServerName hchung-testsvr -ResourceGroupName $rg.ResourceGroupName
-	$restoredDbName = "powershell_db_restored_ltr"
-	$recoveryPointResourceId = "/subscriptions/e5e8af86-2d93-4ebd-8eb5-3b0184daa9de/resourceGroups/hchung/providers/Microsoft.RecoveryServices/vaults/hchung-testvault/backupFabrics/Azure/protectionContainers/AzureSqlContainer;Sql;hchung;hchung-testsvr/protectedItems/AzureSqlDb;dsName;hchung-testdb;fbf5641f-77f8-43b7-8fd7-5338ec293213/recoveryPoints/1731556986347"
+	$restoredDbName = "powershell_db_restored_ltr2"
+	$recoveryPointResourceId = "/subscriptions/e5e8af86-2d93-4ebd-8eb5-3b0184daa9de/resourceGroups/sqlbackuprg/providers/Microsoft.RecoveryServices/vaults/sqlbackupvault/backupFabrics/Azure/protectionContainers/AzureSqlContainer;Sql;sqlbackuprg;hchung-testsvr4/protectedItems/AzureSqlDb;dsName;hchung-testdb4;e25dab2a-65de-4f53-be74-67ea2308cad3/recoveryPoints/10036026017904"
 
-    Restore-AzureRmSqlDatabase -FromLongTermRetentionBackup -ResourceId $recoveryPointResourceId -TargetDatabaseName $restoredDbName -ResourceGroupName $rg.ResourceGroupName -ServerName $server.ServerName
+    Restore-AzureRmSqlDatabase -FromLongTermRetentionBackup -Id $recoveryPointResourceId -TargetDatabaseName $restoredDbName -ResourceGroupName $rg.ResourceGroupName -ServerName $server.ServerName
 }
