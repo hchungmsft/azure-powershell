@@ -24,8 +24,7 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
     /// <summary>
     /// Cmdlet to create or update a new Azure Sql Server backup archival vault
     /// </summary>
-    [Cmdlet(VerbsCommon.Set, "AzureRmSqlServerBackupLongTermRetentionVault",
-        ConfirmImpact = ConfirmImpact.Medium)]
+    [Cmdlet(VerbsCommon.Set, "AzureRmSqlServerBackupLongTermRetentionVault")]
     public class SetAzureSqlServerBackupLongTermRetentionVault : AzureSqlServerBackupLongTermRetentionVaultCmdletBase
     {
         /// <summary>
@@ -35,6 +34,7 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
             ValueFromPipelineByPropertyName = true,
             HelpMessage = "The Resource ID of the Backup Long Term Retention Vault.")]
         [ValidateNotNullOrEmpty]
+        [Alias("Id")]
         public string ResourceId { get; set; }
 
         /// <summary>
@@ -53,9 +53,11 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
         /// </summary>
         /// <param name="model">Model retrieved from service</param>
         /// <returns>The model that was passed in</returns>
-        protected override IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> ApplyUserInputToModel(IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> model)
+        protected override IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> ApplyUserInputToModel(
+            IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> model)
         {
-            List<Model.AzureSqlServerBackupLongTermRetentionVaultModel> newEntity = new List<AzureSqlServerBackupLongTermRetentionVaultModel>();
+            List<Model.AzureSqlServerBackupLongTermRetentionVaultModel> newEntity = 
+                new List<AzureSqlServerBackupLongTermRetentionVaultModel>();
             newEntity.Add(new AzureSqlServerBackupLongTermRetentionVaultModel()
             {
                 ResourceGroupName = ResourceGroupName,
@@ -71,7 +73,8 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
         /// </summary>
         /// <param name="entity">The output of apply user input to model</param>
         /// <returns>The input entity</returns>
-        protected override IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> PersistChanges(IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> entity)
+        protected override IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> PersistChanges(
+            IEnumerable<AzureSqlServerBackupLongTermRetentionVaultModel> entity)
         {
             return new List<AzureSqlServerBackupLongTermRetentionVaultModel>() {
                 ModelAdapter.SetBackupLongTermRetentionVault(this.ResourceGroupName, this.ServerName, entity.First())

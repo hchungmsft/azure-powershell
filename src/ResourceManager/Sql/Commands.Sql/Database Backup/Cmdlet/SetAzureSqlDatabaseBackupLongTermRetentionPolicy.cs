@@ -24,8 +24,7 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
     /// <summary>
     /// Cmdlet to create or update a new Azure Sql Database backup archival policy
     /// </summary>
-    [Cmdlet(VerbsCommon.Set, "AzureRmSqlDatabaseBackupLongTermRetentionPolicy",
-        ConfirmImpact = ConfirmImpact.Medium)]
+    [Cmdlet(VerbsCommon.Set, "AzureRmSqlDatabaseBackupLongTermRetentionPolicy")]
     public class SetAzureSqlDatabaseBackupLongTermRetentionPolicy : AzureSqlDatabaseBackupLongTermRetentionPolicyCmdletBase
     {
         /// <summary>
@@ -43,6 +42,7 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
             ValueFromPipelineByPropertyName = true,
             HelpMessage = "The Resource ID of the backup long term retention policy.")]
         [ValidateNotNullOrEmpty]
+        [Alias("Id")]
         public string ResourceId { get; set; }
 
         /// <summary>
@@ -63,7 +63,8 @@ namespace Microsoft.Azure.Commands.Sql.Backup.Cmdlet
         /// <returns>The model that was passed in</returns>
         protected override IEnumerable<AzureSqlDatabaseBackupLongTermRetentionPolicyModel> ApplyUserInputToModel(IEnumerable<AzureSqlDatabaseBackupLongTermRetentionPolicyModel> model)
         {
-            List<Model.AzureSqlDatabaseBackupLongTermRetentionPolicyModel> newEntity = new List<AzureSqlDatabaseBackupLongTermRetentionPolicyModel>();
+            List<Model.AzureSqlDatabaseBackupLongTermRetentionPolicyModel> newEntity = 
+                new List<AzureSqlDatabaseBackupLongTermRetentionPolicyModel>();
             newEntity.Add(new AzureSqlDatabaseBackupLongTermRetentionPolicyModel()
             {
                 ResourceGroupName = ResourceGroupName,
